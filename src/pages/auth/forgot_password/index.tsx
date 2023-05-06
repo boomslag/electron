@@ -5,6 +5,7 @@ import CircleLoader from 'react-spinners/CircleLoader';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/reducers';
 import AuthLayout from '@/hocs/AuthLayout';
+import logo from '@/assets/logo/boomslagfavicon.png';
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
@@ -51,11 +52,8 @@ export default function ForgotPassword() {
     <AuthLayout>
       <div className="sm:mx-auto sm:w-full sm:max-w-lg">
         <div>
-          <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          />
+          <img className="mx-auto h-20 w-auto" src={logo} alt="Your Company" />
+
           <p className="mb-6 pt-8 text-center text-xl font-bold tracking-tight text-dark-txt">
             Forgot Your Password
           </p>
@@ -80,7 +78,7 @@ export default function ForgotPassword() {
                   value={email}
                   onChange={(e) => onChange(e)}
                   required
-                  className="text-md duration block w-full border-2 focus:ring-2 focus:ring-white  border-dark py-3 pl-10 font-regular rounded-lg transition ease-in-out bg-dark-second text-dark-txt-secondary"
+                  className="text-lg duration block w-full border-2 focus:ring-2 focus:ring-white border-white border-opacity-30 py-3 pl-10 font-regular rounded-lg transition ease-in-out bg-dark-bg bg-opacity-70 text-white placeholder:text-white placeholder:text-opacity-30"
                   placeholder="Enter your email"
                 />
               </div>

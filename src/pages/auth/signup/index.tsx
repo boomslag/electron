@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import {
   CakeIcon,
   EnvelopeIcon,
+  GlobeAltIcon,
   IdentificationIcon,
   LockClosedIcon,
   UserIcon,
@@ -11,6 +12,7 @@ import CircleLoader from 'react-spinners/CircleLoader';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/reducers';
 import AuthLayout from '@/hocs/AuthLayout';
+import countries from '@/helpers/fixedCountries';
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -41,16 +43,15 @@ export default function Signup() {
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
     email: '',
     username: '',
     password: '',
     rePassword: '',
     birthday: '',
+    country: '',
   });
 
-  const { firstName, lastName, email, username, password, rePassword, birthday } = formData;
+  const { email, username, password, rePassword, birthday, country } = formData;
 
   const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -93,6 +94,30 @@ export default function Signup() {
             <form onSubmit={onSubmit} className="space-y-3">
               <div className="relative mt-1 rounded-md shadow-sm">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <GlobeAltIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                </div>
+                <div className=" sm:col-span-2">
+                  <select
+                    name="country"
+                    value={country}
+                    required
+                    onChange={(e) => onChange(e)}
+                    className="text-lg duration block w-full border-2 focus:ring-2 focus:ring-white border-white border-opacity-30 py-3 pl-10 font-regular rounded-lg transition ease-in-out bg-dark-bg bg-opacity-70 text-white text-opacity-30"
+                  >
+                    {countries &&
+                      countries !== null &&
+                      countries !== undefined &&
+                      countries.map((pais) => (
+                        <option key={pais.name} value={pais.name}>
+                          {pais.name}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="relative mt-1 rounded-md shadow-sm">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                   <CakeIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                 </div>
                 <input
@@ -101,7 +126,7 @@ export default function Signup() {
                   value={birthday}
                   onChange={(e) => onChange(e)}
                   required
-                  className="text-md duration block w-full border-2 focus:ring-2 focus:ring-white border-dark py-3 pl-10 font-regular rounded-lg transition ease-in-out bg-dark-second text-dark-txt-secondary"
+                  className="text-lg duration block w-full border-2 focus:ring-2 focus:ring-white border-white border-opacity-30 py-3 pl-10 font-regular rounded-lg transition ease-in-out bg-dark-bg bg-opacity-70 text-white text-opacity-30"
                   placeholder="Birthday"
                 />
               </div>
@@ -116,7 +141,7 @@ export default function Signup() {
                   value={email}
                   onChange={(e) => onChange(e)}
                   required
-                  className="text-md duration block w-full border-2 focus:ring-2 focus:ring-white border-dark py-3 pl-10 font-regular rounded-lg transition ease-in-out bg-dark-second text-dark-txt-secondary"
+                  className="text-lg duration block w-full border-2 focus:ring-2 focus:ring-white border-white border-opacity-30 py-3 pl-10 font-regular rounded-lg transition ease-in-out bg-dark-bg bg-opacity-70 text-white placeholder:text-white placeholder:text-opacity-30"
                   placeholder="Enter your email"
                 />
               </div>
@@ -131,7 +156,7 @@ export default function Signup() {
                   value={username}
                   onChange={(e) => onChange(e)}
                   required
-                  className="text-md duration block w-full border-2 focus:ring-2 focus:ring-white border-dark py-3 pl-10 font-regular rounded-lg transition ease-in-out bg-dark-second text-dark-txt-secondary"
+                  className="text-lg duration block w-full border-2 focus:ring-2 focus:ring-white border-white border-opacity-30 py-3 pl-10 font-regular rounded-lg transition ease-in-out bg-dark-bg bg-opacity-70 text-white placeholder:text-white placeholder:text-opacity-30"
                   placeholder="Username"
                 />
               </div>
@@ -146,7 +171,7 @@ export default function Signup() {
                   value={password}
                   onChange={(e) => onChange(e)}
                   required
-                  className="text-md duration block w-full border-2 focus:ring-2 focus:ring-white border-dark py-3 pl-10 font-regular rounded-lg transition ease-in-out bg-dark-second text-dark-txt-secondary"
+                  className="text-lg duration block w-full border-2 focus:ring-2 focus:ring-white border-white border-opacity-30 py-3 pl-10 font-regular rounded-lg transition ease-in-out bg-dark-bg bg-opacity-70 text-white placeholder:text-white placeholder:text-opacity-30"
                   placeholder="Password"
                 />
               </div>
@@ -161,7 +186,7 @@ export default function Signup() {
                   value={rePassword}
                   onChange={(e) => onChange(e)}
                   required
-                  className="text-md duration block w-full border-2 focus:ring-2 focus:ring-white border-dark py-3 pl-10 font-regular rounded-lg transition ease-in-out bg-dark-second text-dark-txt-secondary"
+                  className="text-lg duration block w-full border-2 focus:ring-2 focus:ring-white border-white border-opacity-30 py-3 pl-10 font-regular rounded-lg transition ease-in-out bg-dark-bg bg-opacity-70 text-white placeholder:text-white placeholder:text-opacity-30"
                   placeholder="Repeat Password"
                 />
               </div>
@@ -250,7 +275,7 @@ export default function Signup() {
                 )}
               </div>
             </form>
-            <div className="mt-4 flex items-center justify-center">
+            {/* <div className="mt-4 flex items-center justify-center">
               <div className="text-sm">
                 <Link
                   to="/auth/resend_activation"
@@ -259,12 +284,12 @@ export default function Signup() {
                   Resend activation email
                 </Link>
               </div>
-            </div>
+            </div> */}
             <div className="my-2 flex items-center justify-center">
               <div className="text-sm">
-                <span className="text-md font-base text-dark-txt">Already have an account? </span>
+                <span className="text-lg font-medium text-dark-txt">Already have an account? </span>
                 <Link to="/" className="text-lg font-medium text-blue-300 hover:text-blue-400">
-                  Login
+                  Sign in
                 </Link>
               </div>
             </div>
